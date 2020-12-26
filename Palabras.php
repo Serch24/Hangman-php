@@ -26,7 +26,7 @@
             setcookie('palabra', $this->palabra_elegida);   
             header("refresh:0");
          }else{
-            echo "La palabra es {$_COOKIE['palabra']}";
+            echo $_COOKIE['palabra'];
          }
       }
       
@@ -35,6 +35,14 @@
         for($i=0;$i< strlen($size);$i++){
             echo " _ ";
         }
+      }
+
+      public function comprobar_palabra($palabra){
+         if(strpos($_COOKIE['palabra'],$palabra)!== FALSE){
+            echo "<br>si está la letra {$palabra}";
+         }else{
+            echo "no se encuentra esa letra";
+         }
       }
 
 	}
