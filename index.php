@@ -1,3 +1,7 @@
+<?php
+   ob_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +11,15 @@
 </head>
 <body>
 <?php
-	include_once("Palabras.php");
+   include_once("Palabras.php");
 
 	$mostrar = new Palabras();
-	echo $mostrar->mostrarPalabra();
-   $mostrar->palabra_guardada();
+	$mostrar->mostrarPalabra();
+   $mostrar->cookie_palabra();
+   $mostrar->palabra_guion();
    ?>
 </body>
 </html>
+<?php
+   ob_flush();
+?>
