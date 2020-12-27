@@ -12,28 +12,42 @@
 <body>
 <?php
    include_once("Palabras.php");
-
 	$mostrar = new Palabras();
-	$mostrar->mostrarPalabra();
-   $mostrar->cookie_palabra();
-   $mostrar->palabra_guion();
-   if(isset($_GET['letra'])){
-       if(!empty($_GET['letra'])) {
-           $mostrar->comprobar_palabra($_GET['letra']);
-       }else{
-         echo "<h1>Hay un campo vacio</h1>";
-       }
+   if($_SERVER['REQUEST_METHOD'] == 'GET'){
+	   $mostrar->mostrarPalabra();
+      $mostrar->cookie_palabra();
+      $mostrar->palabra_guion();
    }
+
+   /*if(isset($_COOKIE['letra'])){
+       echo "<br>".$_COOKIE['letra']."<br>";     
+   }*/
+
+   if($_SERVER['REQUEST_METHOD'] == 'POST'){
+        if(isset($_POST['letra'])){
+            $mostrar->cookie_letra($_POST['letra']);
+            $mostrar->comprobar();
+            $flag = false;
+      /*header("Location: /index.php");   */
+        }   
+
+   }
+   
+   if($_SERVER['REQUEST_METHOD'] == 'POST' && $flag){
+      echo "<p>u win</p>"; 
+   }else{
 ?>
-  <form method="GET" action="<?php echo $_SERVER['PHP_SELF']?>">
-      <input type="text" name="letra" placeholder="escribe algo" autofocus>
+  <form method="POST" action="<?php echo $_SERVER['PHP_SELF']?>">
+      <br><input type="text" name="letra" placeholder="escribe algo"  maxlength="1" required autofocus>
       <button>enviar</button>
   </form>
-<?php
 
-   ?>
+<?php
+   }
+?>
+
 </body>
 </html>
 <?php
-   ob_flush();
+   ob_end_flush();
 ?>

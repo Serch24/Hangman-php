@@ -24,34 +24,54 @@
       public function cookie_palabra(){
          if(!isset($_COOKIE['palabra'])){
             setcookie('palabra', $this->palabra_elegida);   
-            header("refresh:0");
-         }else{
-            echo $_COOKIE['palabra'];
+            header("refresh: 0; url='index.php'");
          }
       }
       
       public function palabra_guion(){
-        $size = $_COOKIE['palabra'];
-        for($i=0;$i< strlen($size);$i++){
-            echo " _ ";
-        }
+           if(isset($_COOKIE['palabra'])){
+             $size = strlen($_COOKIE['palabra']); 
+               for($i=0;$i < $size;$i++){
+                  echo " _ ";
+               }
+           }
       }
 
-      public function comprobar_palabra($palabra){
-         if(strpos($_COOKIE['palabra'],$palabra)!== FALSE){
-            echo "<br>si está la letra {$palabra}";
-         }else{
-            echo "no se encuentra esa letra";
+      /*Si la letra no se encuentra en la cadena devolverá FALSE, y si la letra se encuentra devolvera algo diferente a FALSE*/
+      public function cookie_letra($letra){
+         if(strpos($_COOKIE['palabra'],$letra)!== FALSE){
+            if(!isset($_COOKIE['letra'])){
+               setcookie('letra',$letra);
+            }else{
+                  $tmp = $_COOKIE['letra'];
+                  setcookie('letra',$tmp,time()-1);
+                  setcookie('letra',$tmp.$letra);
+            }
          }
+
+         /*header("refresh: 0; url='index.php'");*/
       }
+
+      public function comprobar(){
+          if(isset($_COOKIE['letra'])&& isset($_COOKIE['palabra'])){
+               $letra = $_COOKIE['letra'];
+               $palabra = $_COOKIE['palabra'];
+               echo "<p>Letra: {$letra}</p><p>Palabra: {$palabra}</p>";
+               /*for($i=0;$i<count($arrai);$i++){
+                  for($j=0;$j<count($arrai);$j++){
+
+                  }
+               }*/
+          }
+      }
+      
+      
+
+
+
+
+
 
 	}
-
-
-
-
-
-
-
 
 ?>
