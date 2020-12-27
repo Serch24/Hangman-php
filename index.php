@@ -1,7 +1,3 @@
-<?php
-   ob_start();
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,33 +8,30 @@
 <body>
 <?php
    include_once("Palabras.php");
-	$mostrar = new Palabras();
+	/*$mostrar = new Palabras();
    if($_SERVER['REQUEST_METHOD'] == 'GET'){
 	   $mostrar->mostrarPalabra();
       $mostrar->cookie_palabra();
       $mostrar->palabra_guion();
-   }
-
-   /*if(isset($_COOKIE['letra'])){
-       echo "<br>".$_COOKIE['letra']."<br>";     
    }*/
+
+   echo "<pre>";
+   print_r($_COOKIE);
+   echo "</pre>";
 
    if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(isset($_POST['letra'])){
-            $mostrar->cookie_letra($_POST['letra']);
-            $mostrar->comprobar();
-            $flag = false;
-      /*header("Location: /index.php");   */
+
         }   
 
    }
    
-   if($_SERVER['REQUEST_METHOD'] == 'POST' && $flag){
+   if($_SERVER['REQUEST_METHOD'] == 'POST' && FALSE){
       echo "<p>u win</p>"; 
    }else{
 ?>
-  <form method="POST" action="<?php echo $_SERVER['PHP_SELF']?>">
-      <br><input type="text" name="letra" placeholder="escribe algo"  maxlength="1" required autofocus>
+  <form method="POST" action="Palabras.php">
+      <input type="text" name="letra" placeholder="escribe algo"  maxlength="1" required autofocus>
       <button>enviar</button>
   </form>
 
@@ -48,6 +41,3 @@
 
 </body>
 </html>
-<?php
-   ob_end_flush();
-?>

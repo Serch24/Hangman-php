@@ -24,8 +24,11 @@
       public function cookie_palabra(){
          if(!isset($_COOKIE['palabra'])){
             setcookie('palabra', $this->palabra_elegida);   
-            header("refresh: 0; url='index.php'");
          }
+      }
+
+      public function cookie_inicio(){
+         setcookie('inicio',1);
       }
       
       public function palabra_guion(){
@@ -64,14 +67,17 @@
                }*/
           }
       }
-      
-      
-
-
-
-
-
-
 	}
+
+   if(isset($_COOKIE['inicio'])){
+      echo "Ya se ha iniciado la partida";
+   }else{
+      $inicio = new Palabras();
+      $inicio->cookie_inicio();
+      $inicio->mostrarPalabra();
+      $inicio->cookie_palabra();
+      $inicio->palabra_guion();
+      header("refresh: 3; url=index.php");
+   }
 
 ?>
