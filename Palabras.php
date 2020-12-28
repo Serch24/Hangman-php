@@ -22,9 +22,7 @@
       }
 
       public function cookie_palabra(){
-         if(!isset($_COOKIE['palabra'])){
             setcookie('palabra', $this->palabra_elegida);   
-         }
       }
 
       public function cookie_inicio(){
@@ -52,7 +50,6 @@
             }
          }
 
-         /*header("refresh: 0; url='index.php'");*/
       }
 
       public function comprobar(){
@@ -69,15 +66,16 @@
       }
 	}
 
-   if(isset($_COOKIE['inicio'])){
-      echo "Ya se ha iniciado la partida";
-   }else{
       $inicio = new Palabras();
-      $inicio->cookie_inicio();
-      $inicio->mostrarPalabra();
-      $inicio->cookie_palabra();
-      $inicio->palabra_guion();
-      header("refresh: 3; url=index.php");
+      if(isset($_COOKIE['inicio'])){
+          echo "<h1>Adivina la palabra</h1>";
+          $inicio->palabra_guion();
+      }else{
+         $inicio->cookie_inicio();
+         $inicio->mostrarPalabra();
+         $inicio->cookie_palabra();
+         header("Location:index.php");
+
    }
 
 ?>

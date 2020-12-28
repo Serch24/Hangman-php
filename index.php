@@ -8,30 +8,24 @@
 <body>
 <?php
    include_once("Palabras.php");
-	/*$mostrar = new Palabras();
-   if($_SERVER['REQUEST_METHOD'] == 'GET'){
-	   $mostrar->mostrarPalabra();
-      $mostrar->cookie_palabra();
-      $mostrar->palabra_guion();
-   }*/
 
-   echo "<pre>";
+   /*echo "<pre>";
    print_r($_COOKIE);
-   echo "</pre>";
+   echo "</pre>";*/
 
-   if($_SERVER['REQUEST_METHOD'] == 'POST'){
-        if(isset($_POST['letra'])){
+    if(isset($_COOKIE['palabra'])){
+      echo "<pre>";
+      print_r($_COOKIE);
+      echo "</pre>";
+    }   
 
-        }   
-
-   }
    
    if($_SERVER['REQUEST_METHOD'] == 'POST' && FALSE){
       echo "<p>u win</p>"; 
    }else{
 ?>
   <form method="POST" action="Palabras.php">
-      <input type="text" name="letra" placeholder="escribe algo"  maxlength="1" required autofocus>
+      <br><input type="text" name="letra" placeholder="escribe algo"  maxlength="1" required autofocus>
       <button>enviar</button>
   </form>
 
