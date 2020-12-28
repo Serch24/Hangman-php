@@ -18,7 +18,13 @@
       print_r($_COOKIE);
       echo "</pre>";
     }   
-
+    if(isset($_COOKIE['error'])){
+         echo "</h3>Esa letra no está, pierdes un punto!</h3>"; 
+         setcookie('error',1,time()-1);
+    }
+    if(isset($_COOKIE['win'])){
+         echo "<h1>Ganaste!!!!!!!!!!!!!</h1"; 
+    }
    
    if($_SERVER['REQUEST_METHOD'] == 'POST' && FALSE){
       echo "<p>u win</p>"; 
@@ -26,7 +32,7 @@
 ?>
   <form method="POST" action="Palabras.php">
       <br><input type="text" name="letra" placeholder="escribe algo"  maxlength="1" required autofocus>
-      <button>enviar</button>
+     <input type="submit" name="enviar" value="enviar"> 
   </form>
 
 <?php
