@@ -22,8 +22,13 @@
          echo "</h3>Esa letra no está, pierdes un punto!</h3>"; 
          setcookie('error',1,time()-1);
     }
-    if(isset($_COOKIE['win'])){
-         echo "<h1>Ganaste!!!!!!!!!!!!!</h1"; 
+
+    if(isset($_COOKIE['palabra'],$_COOKIE['letra'])){
+         $size_palabra = $_COOKIE['palabra'];
+         $size_letra = $_COOKIE['letra'];
+         if(strlen($size_palabra)=== strlen($size_letra)){
+             echo "<h1>Ganaste!!!!!!!!!!!!!</h1"; 
+         }
     }
    
    if($_SERVER['REQUEST_METHOD'] == 'POST' && FALSE){

@@ -3,7 +3,6 @@
       private $palabras = [];
       private $palabra_elegida;
       private $cantidad_letras = [];
-      private $letras_de_cookies = [];
 		public function __construct(){
          $this->palabra_elegida = "";
 		}
@@ -45,18 +44,12 @@
        *y si la letra se encuentra devolvera algo diferente a FALSE*/
 
       public function cookie_letra_repetidas($letra,$cantidad){
-              $tmp="";
-            if(isset($_COOKIE['letra'])){
-            
-               $tmp=$_COOKIE['letra'];
-            }else{
-               header("refresh:0");
-            }
-            echo "la cookie es $tmp";
+            $tmp= $_COOKIE['letra'];
             for($i=0;$i<$cantidad;$i++){
                 $tmp .= $letra;
             }
             setcookie('letra',$tmp);
+            header("Location:index.php");
       }
 
 
@@ -70,21 +63,27 @@
                  if(strpos($_COOKIE['letra'],$letra)===false){
                     $veces_letra_palabra = $this->cantidad_letras[$letra];
                     $this->cookie_letra_repetidas($letra,$veces_letra_palabra);
-                    return;
+                    /*header("Location:index.php");*/
                  }
-                 setcookie('error',1);
-                 setcookie('vidas_totales',5);
+                 /*setcookie('error',1);
+                 setcookie('vidas_totales',5);*/
 
-                 foreach(count_chars($_COOKIE['letra'],1) as $k => $v){
+                 /*foreach(count_chars($_COOKIE['letra'],1) as $k => $v){
                     $this->letras_de_cookies[chr($k)] = $v; 
                  }
+                 echo "<pre>";
+                 print_r($this->letras_de_cookies);
+                 echo "</pre>";
                  $size_palabras = count($this->cantidad_letras); 
                  $size_letras = count($this->letras_de_cookies);
                  echo "cant de palabra: $size_palabras <br>";
                  echo "cant de letras: $size_letras<br>";
+
                  if($size_letras==$size_palabras){
                      setcookie('win',1);
-                 }
+                 }*/
+               header("Location:index.php");
+                 
               }else{
                   /*Si no esxista la cookie letra la crea*/
                   $this->cookie_letra_repetidas($letra,$this->cantidad_letras[$letra]);
@@ -93,6 +92,7 @@
           }else{
             setcookie('error',1);
             setcookie('vidas_totales',5);
+            header("Location:index.php");
           }
       }
 	}
@@ -103,7 +103,6 @@
           $inicio->palabra_guion();
           if(isset($_POST['letra'])){
                $inicio->comprobar($_POST['letra']);
-               header("refresh:6; url=index.php");
           }
 
       }else{
