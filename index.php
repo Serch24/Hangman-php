@@ -9,17 +9,8 @@
 <?php
    include_once("Palabras.php");
 
-   /*echo "<pre>";
-   print_r($_COOKIE);
-   echo "</pre>";*/
-
-    if(isset($_COOKIE['palabra'])){
-      echo "<pre>";
-      print_r($_COOKIE);
-      echo "</pre>";
-    }   
     if(isset($_COOKIE['error'])){
-         echo "</h3>Esa letra no está, pierdes un punto!</h3>"; 
+         echo "<br></h3>Esa letra no está, pierdes un punto!</h3>"; 
          setcookie('error',1,time()-1);
     }
 
@@ -27,7 +18,12 @@
          $size_palabra = $_COOKIE['palabra'];
          $size_letra = $_COOKIE['letra'];
          if(strlen($size_palabra)=== strlen($size_letra)){
-             echo "<h1>Ganaste!!!!!!!!!!!!!</h1"; 
+             echo "<h1>Ganaste!!!!!!!!!!!!!</h1>"; 
+             ?>
+             <form method="POST" action="Palabras.php">
+               <input type='submit' name='reset' value='reiniciar' class='reset'>
+             </form>
+    <?php
          }
     }
    
