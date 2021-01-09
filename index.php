@@ -7,37 +7,51 @@
 </head>
 <body>
 <?php
-   include_once("Palabras.php");
+include_once "Palabras.php";
 
-    if(isset($_COOKIE['error'])){
-         echo "<br></h3>Esa letra no está, pierdes un punto!</h3>"; 
-         setcookie('error',1,time()-1);
+echo "<pre>";
+print_r($_COOKIE);
+echo "</pre>";
+
+/*if (isset($_COOKIE["error"])) {
+    echo "<br></h3>Esa letra no está, pierdes un punto!</h3>";
+    setcookie("error", 1, time() - 1);
+}*/
+
+if (isset($_COOKIE["guionn"], $_COOKIE["palabra"])) {
+    for ($i = 0; $i < strlen($_COOKIE["guionn"]); $i++) {
+        /*echo substr($_COOKIE["guionn"], $i, 1) . " ";*/
     }
+    echo "Ya existe!!";
+} else {
+    for ($i = 0; $i < strlen($_COOKIE["palabra"]); $i++) {
+        echo " _ ";
+    }
+}
 
-    if(isset($_COOKIE['palabra'],$_COOKIE['letra'])){
-         $size_palabra = $_COOKIE['palabra'];
-         $size_letra = $_COOKIE['letra'];
-         if(strlen($size_palabra)=== strlen($size_letra)){
-             echo "<h1>Ganaste!!!!!!!!!!!!!</h1>"; 
-             ?>
+if (isset($_COOKIE["palabra"], $_COOKIE["letra"])) {
+    $size_palabra = $_COOKIE["palabra"];
+    $size_letra = $_COOKIE["letra"];
+    if (strlen($size_palabra) === strlen($size_letra)) {
+        echo "<h1>Ganaste!!!!!!!!!!!!!</h1>"; ?>
              <form method="POST" action="Palabras.php">
                <input type='submit' name='reset' value='reiniciar' class='reset'>
              </form>
     <?php
-         }
     }
-   
-   if($_SERVER['REQUEST_METHOD'] == 'POST' && FALSE){
-      echo "<p>u win</p>"; 
-   }else{
-?>
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && false) {
+    echo "<p>u win</p>";
+} else {
+     ?>
   <form method="POST" action="Palabras.php">
       <br><input type="text" name="letra" placeholder="escribe algo"  maxlength="1" required autofocus>
      <input type="submit" name="enviar" value="enviar"> 
   </form>
 
 <?php
-   }
+}
 ?>
 
 </body>
