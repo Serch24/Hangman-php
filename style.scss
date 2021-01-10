@@ -1,0 +1,100 @@
+@import url('https://fonts.googleapis.com/css2?family=Yusei+Magic&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Yeon+Sung&display=swap');
+$bg-color: #16325fd8;
+$color-bienvenida:rgb(202, 169, 118); 
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: $bg-color;
+    overflow: hidden;
+    .bienvenida{
+        color: $color-bienvenida;
+        text-align: center;
+        font-size: 3rem;
+        font-family: 'Yusei Magic', sans-serif;
+    }
+    .guiones{
+        display: flex;
+        width: 100%;
+        justify-content: space-evenly;
+        margin-top: 30px;
+        p{
+            font-size: 3rem;
+            color: $color-bienvenida;
+            font-family: 'Yeon Sung', cursive;
+        }
+    }
+    .form-inicio{
+        display: flex;
+        flex-direction: column;
+        width: 50vw;
+        margin:20px auto auto auto;
+        input:nth-child(1){
+            margin-bottom: 10px;
+        }
+        input:nth-child(2){
+            width: 50%;
+            border-radius: 1em;
+            padding: 0.5em;
+            font-size: 1em;
+            text-transform: uppercase;
+            font-weight: bold;
+            background-color: $color-bienvenida;
+            border: 2px solid white;
+            &:hover{
+                transform: translate(0,0.075em);
+            }
+        }
+    }
+    .todo-cambia{
+        color: black;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+        font-size: 3rem;
+        font-family: 'Yusei Magic', sans-serif;
+        &::before{
+            content: "";
+            position: absolute;
+            top: -300px;
+            left: 0;
+            width: 100%;
+            height: 300vh;
+            background-color: rgb(148, 148, 110);
+            z-index: -1;
+        }
+    }
+    form{
+        display: flex;
+        justify-content: center;
+        height: 300px;
+        align-items: center;
+        .form-reiniciar{
+            position: relative;
+            z-index: 1;   
+            padding: 1em 2em;
+            border: 2px solid rgba(255, 255, 255, 0.658);
+            border-radius: 1em;
+            background-color: rgba(148, 160, 94, 0.836);
+            font-size: 2rem;
+            color:rgb(54, 54, 33);
+            box-shadow: 8px 7px 31px -10px rgba(0,0,0,0.75);
+            &:hover{
+                transform: translate(0,0.355em);
+                cursor: pointer;
+            }
+        }
+    }
+    .error{
+        text-align: center;
+        color: rgb(236, 76, 76);
+    }
+    .cant-vida{
+        text-align: end;
+        margin-right: 10px;
+        color: rgb(167, 190, 83);
+    }
+}
