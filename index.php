@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,42 +7,54 @@
 </head>
 <body>
 <?php
-include_once "Palabras.php";
+$win = false;
 
-echo "<pre>";
-print_r($_COOKIE);
-echo "</pre>";
-
-/*if (isset($_COOKIE["error"])) {
-    echo "<br></h3>Esa letra no está, pierdes un punto!</h3>";
-    setcookie("error", 1, time() - 1);
-}*/
-
-if (isset($_COOKIE["guionn"], $_COOKIE["palabra"])) {
-    for ($i = 0; $i < strlen($_COOKIE["guionn"]); $i++) {
-        /*echo substr($_COOKIE["guionn"], $i, 1) . " ";*/
-    }
-    echo "Ya existe!!";
+/*Mensaje de bienvenida, crea la cookie de inicio*/
+if (!isset($_COOKIE["inicio"])) {
+    header("Location:Palabras.php");
 } else {
-    for ($i = 0; $i < strlen($_COOKIE["palabra"]); $i++) {
-        echo " _ ";
+    echo "<h1>Bienvenido, Adivina la palabra</h1>";
+}
+
+/*Determina si las dos cadenas son iguales y ponde WIN en true*/
+if (isset($_COOKIE["guiones"], $_COOKIE["palabra"])) {
+    $tmp_guiones = $_COOKIE["guiones"];
+    $tmp_palabra = $_COOKIE["palabra"];
+    if (strcmp($tmp_guiones, $tmp_palabra) == 0) {
+        $win = true;
     }
 }
 
-if (isset($_COOKIE["palabra"], $_COOKIE["letra"])) {
-    $size_palabra = $_COOKIE["palabra"];
-    $size_letra = $_COOKIE["letra"];
-    if (strlen($size_palabra) === strlen($size_letra)) {
-        echo "<h1>Ganaste!!!!!!!!!!!!!</h1>"; ?>
-             <form method="POST" action="Palabras.php">
-               <input type='submit' name='reset' value='reiniciar' class='reset'>
-             </form>
-    <?php
+/*Muestra los guiones y caracteres si se ha adivinado la letra*/
+if (isset($_COOKIE["guiones"])) {
+    for ($i = 0; $i < strlen($_COOKIE["guiones"]); $i++) {
+        echo substr($_COOKIE["guiones"], $i, 1) . "   ";
     }
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && false) {
-    echo "<p>u win</p>";
+/*Si se equivoca en escribir una palabra muestra un mensaje de error y elimina
+ * la cookie de error_actived para que no aparezca mas el mensaje de error.
+ * */
+if (isset($_COOKIE["error_actived"])) {
+    if ($_COOKIE["error"] == 0) {
+        echo "<h1>Pierdes todas las vidas!!!</h1>"; ?>
+                     <form method="POST" action="Palabras.php">
+                        <input type="submit" name="reiniciar" value="reiniciar" autofocus>
+                     </form>
+                  <?php
+    } else {
+        $vidas = $_COOKIE["error"];
+        echo "<h1>Te has equivocado, te quedan $vidas vidas.</h1>";
+        setcookie("error_actived", "", time() - 1);
+    }
+}
+
+if ($win) {
+    echo "<h1>Ganaste!!!!!!!</h1>"; ?>
+                     <form method="POST" action="Palabras.php">
+                        <input type="submit" name="reiniciar" value="reiniciar" autofocus>
+                     </form>
+                  <?php
 } else {
      ?>
   <form method="POST" action="Palabras.php">
